@@ -41,6 +41,10 @@ export async function addContactAction(
     };
   }
 
-  // On successful validation do something...
+  /**
+   * On successful validation you typically want to:
+   * 1. Redirect Users to a success page of some sort
+   * 2. Revalidate data as needed
+   */
   return { success: true, message: 'Contact submitted successfully!' };
 }
