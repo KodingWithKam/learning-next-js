@@ -24,8 +24,10 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const user = await getUser(id); // cache HIT
-  const albums = await getUserAlbums(id);
+  const userData = getUser(id);
+  const albumsData = getUserAlbums(id);
+  const [user, albums] = await Promise.all([userData, albumsData]);
+
   return (
     <div className="flex flex-col gap-2 p-2">
       <h1 className="text-3xl pb-2">{user.name}</h1>
