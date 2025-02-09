@@ -11,11 +11,11 @@ async function getPost(id: string) {
   return post;
 }
 
-async function getPostComments(id: string) {
+async function getPostComments(postId: string) {
   // The `fetch` function is automatically memoized and the result
   // is cached
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
+    `https://jsonplaceholder.typicode.com/posts/${postId}/comments`,
   );
   const comments: Comment[] = await res.json();
   return comments;
