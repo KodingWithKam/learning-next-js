@@ -18,7 +18,6 @@ async function getPostComments(id: string) {
     `https://jsonplaceholder.typicode.com/posts/${id}/comments`,
   );
   const comments: Comment[] = await res.json();
-  console.log(comments);
   return comments;
 }
 
@@ -59,7 +58,7 @@ export default async function Page({
   const post = await getPost(id); // cache HIT
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 p-2">
       <h1 className="text-3xl pb-2">{post.title}</h1>
       <p>{post.body}</p>
       <Suspense fallback={'comments loading....'}>
@@ -76,9 +75,14 @@ async function Comments({ postId }: { postId: string }) {
   return (
     <div>
       <h1 className="text-xl pb-2">Latest Comments</h1>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 w-1/2">
         {comments.map((comment) => (
-          <div key={comment.id}>{comment.body}</div>
+          <div key={comment.id} className="flex flex-col gap-2">
+            <span>{comment.body}</span>
+            <span>
+              by: <strong>{comment.name}</strong>
+            </span>
+          </div>
         ))}
       </div>
     </div>
